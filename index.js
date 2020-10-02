@@ -1,10 +1,19 @@
-var express = require("express");
+const express = require("express");
+const mDB = require("mongoose");
+const url = "mongodb://localhost:27017/hospitalInventory";
 
-var app = express();
-app.get('/', function(req, res){
-    res.send("Hello world");
-    console.log("Hello world print @ port 3000");
+const app = express();
+
+mDB.connect(url, {useNewUrlParse:true});
+const con = mDB.connection;
+
+con.on('open', function(){
+    console.log("Connected.....");
 });
-app.listen(3000);
 
-//console.log("Helloworld");
+const hospInvRouter = require("./hospitalData");
+app.use("/hospitalData", hospInvRouter);
+
+app.listen(3000, function(){
+    console.log("Server started");
+});
