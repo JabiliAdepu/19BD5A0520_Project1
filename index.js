@@ -3,11 +3,10 @@ const mDB = require("mongoose");
 const url = "mongodb://localhost:27017/hospitalInventory";
 
 const app = express();
+app.use(express.json());
+const con = mDB.connect(url, {useNewUrlParse:true});
 
-mDB.connect(url, {useNewUrlParse:true});
-const con = mDB.connection;
-
-con.on('open', function(){
+con.then((db) => {
     console.log("Connected.....");
 });
 
