@@ -4,7 +4,6 @@ const ventilatorSchema = new mongoose.Schema({
     hId:{
         type: String,
         required: true,
-        unique: true
     },
     ventilatorId:{
         type: String,
@@ -21,5 +20,5 @@ const ventilatorSchema = new mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('ventilators', ventilatorSchema);
+module.exports = mongoose.model('ventilators', ventilatorSchema, 'ventilators');
 

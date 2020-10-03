@@ -1,10 +1,11 @@
 const express = require("express");
-const { removeAllListeners } = require("./schemas/hospital");
+const { removeAllListeners } = require("../schemas/hospital");
 const router = express.Router();
-const Hospital = require("./schemas/hospital");
-
+const Hospital = require("../schemas/hospital");
 
 router.route('/')
+
+    //DISPLAY ALL HOSPITALS
     .get((req, res, next) => {
         Hospital.find().then(hospitals => {
              return res.json({
@@ -13,6 +14,8 @@ router.route('/')
             });
         }).catch(e => res.json(e)); 
     })
+
+    //READ HOSPITAL DETAILS
     .post((req, res, next) => {
         console.log(req.body);
         const hospital= {
@@ -28,6 +31,19 @@ router.route('/')
                 hospital: hosp
             });
         }).catch(e => res.json(e));
+    })
+
+//SEARCH HOSPITAL BY NAME
+router.route("/:name")
+    .get((req, res, next) => {
+        Hospital.findOne({name : req.params.name})
+        .then(hospital => {
+            return res.json({
+                status: true,
+                hospital: hospital
+            });
+        }).catch(e => res.json(e));
     });
+    
 
 module.exports = router;
