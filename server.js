@@ -9,7 +9,7 @@ class HandlerGenerator {
     login(req, res) {
         let username = req.body.username;
         let password = req.body.password;
-        // For the given username fetch user from DB
+        
         let mockedUsername = 'admin';
         let mockedPassword = 'password';
 

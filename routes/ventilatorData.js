@@ -105,7 +105,7 @@ router.route("/:ventilatorId")
 
     //DELETE VENTILATORS BY VENTILATOR ID
     .delete((req, res, next) => {
-        Ventilator.findOneDelete({ventilatorId: req.params.ventilatorId})
+        Ventilator.deleteOne({ventilatorId: req.params.ventilatorId})
             .then(ventilator => {
                 return res.json({
                     status: true,
